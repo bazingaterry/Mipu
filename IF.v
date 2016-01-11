@@ -31,6 +31,8 @@ module IF (
 	input wire cf,
 	input wire [15:0] mem_ir,
 	input wire [15:0] i_datain,
+	input wire jp_en,
+	input wire [7:0] jp_addr,
 	output reg [15:0] id_ir,
 	output wire [7:0] i_addr
     );
@@ -47,14 +49,16 @@ always @ (posedge clock or negedge reset) begin
 	else if (state == `exec) begin
 		id_ir <= i_datain;
 
-		if (
+		if (jp_en)
+			pc <= jp_addr;
+		else if (
 			   ((mem_ir[15:11] == `BZ ) && (zf == 1'b1))
 			|| ((mem_ir[15:11] == `BNZ) && (zf == 1'b0))
 			|| ((mem_ir[15:11] == `BN ) && (nf == 1'b1))
 			|| ((mem_ir[15:11] == `BNN) && (nf == 1'b0))
 			|| ((mem_ir[15:11] == `BN)  && (cf == 1'b1))
 			|| ((mem_ir[15:11] == `BNC) && (cf == 1'b0))
-			|| (mem_ir[15:11] == `JUMP) || (mem_ir[15:11] == `JMPR)
+			||  (mem_ir[15:11] == `JMPR)
 		   )
 			pc <= reg_C[7:0];
 		else

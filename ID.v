@@ -37,7 +37,9 @@ module ID (
 	output reg [15:0] ex_ir,
 	output reg [15:0] reg_A,
 	output reg [15:0] reg_B,
-	output reg [15:0] smdr
+	output reg [15:0] smdr,
+	output reg jp_en,
+	output reg [7:0] jp_addr
     );
 
 wire [15:0] gr [7:0];
@@ -51,7 +53,7 @@ assign gr[5] = gr5;
 assign gr[6] = gr6;
 assign gr[7] = gr7;
 
-always@(posedge clock or negedge reset) begin
+always @ (posedge clock or negedge reset) begin
 	if(!reset) begin
 		ex_ir <= 16'b0000_0000_0000_0000;
 		reg_A <= 16'b0000_0000_0000_0000;
@@ -59,7 +61,20 @@ always@(posedge clock or negedge reset) begin
 		smdr  <= 16'b0000_0000_0000_0000;
 	end
 	else if (state == `exec) begin
-		ex_ir <= id_ir;
+		if (id_ir[15:11] == `JUMP)
+			ex_ir <= 0;
+		else
+			ex_ir <= id_ir;
+			
+		if (id_ir[15:11] == `JUMP)
+			jp_en <= 1;
+		else
+			jp_en <= 0;
+			
+		if (id_ir[15:11] == `JUMP)	
+			jp_addr <= id_ir[7:0];
+		else
+			jp_addr <= 0;
 
 		//	write reg_A
 		if (
@@ -98,7 +113,7 @@ always@(posedge clock or negedge reset) begin
 				   (id_ir[15:11] == `BZ) || (id_ir[15:11] == `BNZ)
 				|| (id_ir[15:11] == `BN) || (id_ir[15:11] == `BNN)
 				|| (id_ir[15:11] == `BC) || (id_ir[15:11] == `BNC)
-				|| (id_ir[15:11] == `JUMP) || (id_ir[15:11] == `JMPR)
+				|| (id_ir[15:11] == `JMPR)
 				|| (id_ir[15:11] == `ADDI) || (id_ir[15:11] == `SUBI)
 				)
 			//	reg_B <= {val2, val3}

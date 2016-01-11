@@ -52,6 +52,9 @@ wire [15:0] mem_ir;
 wire [15:0] wb_ir;
 wire [15:0] id_ir;
 
+wire jp_en;
+wire [7:0] jp_addr;
+
 /*** General Register ***/
 
 reg [15:0] gr [7:0];
@@ -85,7 +88,8 @@ CPU_Control CPU_Control (
 IF IF (
 	.clock(clock), .reset(reset), .state(state), 
 	.reg_C(reg_C), .zf(zf), .nf(nf), .cf(cf),
-	.mem_ir(mem_ir), .id_ir(id_ir), .i_addr(i_addr), .i_datain(i_datain)
+	.mem_ir(mem_ir), .id_ir(id_ir), .i_addr(i_addr), .i_datain(i_datain),
+	.jp_en(jp_en), .jp_addr(jp_addr)
 	  );
 
 ID ID (
@@ -93,7 +97,8 @@ ID ID (
 	.id_ir(id_ir), .ex_ir(ex_ir),
 	.reg_A(reg_A), .reg_B(reg_B), .smdr(smdr), 
 	.gr0(gr[0]), .gr1(gr[1]), .gr2(gr[2]), .gr3(gr[3]),
-	.gr4(gr[4]), .gr5(gr[5]), .gr6(gr[6]), .gr7(gr[7])
+	.gr4(gr[4]), .gr5(gr[5]), .gr6(gr[6]), .gr7(gr[7]),
+	.jp_en(jp_en), .jp_addr(jp_addr)
 	  );
 
 EX EX (
