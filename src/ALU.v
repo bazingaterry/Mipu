@@ -50,7 +50,6 @@ always @ (*)
         `SRL    : {cfout, ALUo} <= reg_A >> reg_B[3:0];
         `SLA    : {cfout, ALUo} <= $signed(reg_A) <<< reg_B[3:0];
         `SRA    : {cfout, ALUo} <= $signed(reg_A) >>> reg_B[3:0];
-        `JUMP   : {cfout, ALUo} <= reg_B;
         `JMPR   : {cfout, ALUo} <= reg_A + reg_B;
         `BZ     : {cfout, ALUo} <= reg_A + reg_B;
         `BNZ    : {cfout, ALUo} <= reg_A + reg_B;

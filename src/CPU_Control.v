@@ -38,7 +38,7 @@ always @ (posedge clock) begin
 	else
 		state <= next_state;
 end
-	
+
 always @ (*) begin
 	case (state)
 		`idle:
