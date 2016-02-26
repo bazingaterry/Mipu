@@ -29,6 +29,7 @@ module EX (
 	input wire [15:0] reg_B,
 	input wire [15:0] reg_A,
 	input wire [15:0] smdr,
+	output wire [15:0] ALUo,
 	output reg [15:0] mem_ir,
 	output reg zf,
 	output reg nf,
@@ -38,7 +39,6 @@ module EX (
 	output reg [15:0] smdr1
 	);
 
-wire [15:0] ALUo;
 wire [15:0] ALUi;
 wire cfin, cfout;
 

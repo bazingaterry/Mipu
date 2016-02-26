@@ -31,8 +31,7 @@ module IF (
 	input wire cf,
 	input wire [15:0] mem_ir,
 	input wire [15:0] i_datain,
-	input wire [15:0] id_iri,
-	output reg [15:0] id_iro,
+	output reg [15:0] id_ir,
 	output wire [7:0] i_addr
     );
 
@@ -42,14 +41,14 @@ assign i_addr = pc;
 
 always @ (posedge clock or negedge reset) begin
 	if (!reset) begin
-		id_iro <= 16'b0000_0000_0000_0000;
+		id_ir <= 16'b0000_0000_0000_0000;
 		pc <= 8'b0000_0000;
 	end
 	else if (state == `exec) begin
-		id_iro <= i_datain;
+		id_ir <= i_datain;
 
-		if (id_iri[15:11] == `JUMP)
-			pc <= id_iri[7:0];
+		if (id_ir[15:11] == `JUMP)
+			pc <= id_ir[7:0];
 		else if (
 			   ((mem_ir[15:11] == `BZ ) && (zf == 1'b1))
 			|| ((mem_ir[15:11] == `BNZ) && (zf == 1'b0))

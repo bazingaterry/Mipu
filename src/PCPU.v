@@ -50,8 +50,9 @@ wire zf, nf, cf;
 wire [15:0] ex_ir;
 wire [15:0] mem_ir;
 wire [15:0] wb_ir;
-wire [15:0] id_ir0;
-wire [15:0] id_ir1;
+wire [15:0] id_ir;
+
+wire [15:0] ALUo;
 
 /*** General Register ***/
 
@@ -87,12 +88,13 @@ IF IF (
 	.clock(clock), .reset(reset), .state(state), 
 	.reg_C(reg_C), .zf(zf), .nf(nf), .cf(cf),
 	.mem_ir(mem_ir), .i_addr(i_addr), .i_datain(i_datain),
-	.id_iro(id_ir0), .id_iri(id_ir1)
+	.id_ir(id_ir)
 	  );
 
 ID ID (
 	.clock(clock), .reset(reset), .state(state),
-	.id_iro(id_ir1), .ex_ir(ex_ir), .id_iri(id_ir0),
+	.id_ir(id_ir), .ex_ir(ex_ir), .mem_ir(mem_ir), .wb_ir(wb_ir),
+	.ALUo(ALUo), .reg_C(reg_C), .reg_C1(reg_C1),
 	.reg_A(reg_A), .reg_B(reg_B), .smdr(smdr), 
 	.gr0(gr[0]), .gr1(gr[1]), .gr2(gr[2]), .gr3(gr[3]),
 	.gr4(gr[4]), .gr5(gr[5]), .gr6(gr[6]), .gr7(gr[7])
@@ -101,6 +103,7 @@ ID ID (
 EX EX (
 	.clock(clock), .reset(reset), .state(state), 
 	.ex_ir(ex_ir), .mem_ir(mem_ir),
+	.ALUo(ALUo),
 	.reg_A(reg_A), .reg_B(reg_B),
 	.smdr(smdr), .smdr1(smdr1),
 	.zf(zf), .nf(nf), .cf(cf),
