@@ -94,7 +94,7 @@ IF IF (
 ID ID (
 	.clock(clock), .reset(reset), .state(state),
 	.id_ir(id_ir), .ex_ir(ex_ir), .mem_ir(mem_ir), .wb_ir(wb_ir),
-	.ALUo(ALUo), .reg_C(reg_C), .reg_C1(reg_C1),
+	.ALUo(ALUo), .reg_C(reg_C), .reg_C1(reg_C1), .d_datain(d_datain),
 	.reg_A(reg_A), .reg_B(reg_B), .smdr(smdr), 
 	.gr0(gr[0]), .gr1(gr[1]), .gr2(gr[2]), .gr3(gr[3]),
 	.gr4(gr[4]), .gr5(gr[5]), .gr6(gr[6]), .gr7(gr[7])
