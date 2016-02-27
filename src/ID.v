@@ -79,37 +79,40 @@ always @ (posedge clock or negedge reset) begin
            ) begin
                 if (//  if Hazard
                     (
-                        (ex_ir[15:11] == `LDIH) || (ex_ir[15:11] == `SRA)
+                        (ex_ir[15:11] == `LOAD) || (ex_ir[15:11] == `LDIH)
                     ||  (ex_ir[15:11] == `ADD)  || (ex_ir[15:11] == `ADDI)
                     ||  (ex_ir[15:11] == `ADDC) || (ex_ir[15:11] == `SUB)
                     ||  (ex_ir[15:11] == `SUBI) || (ex_ir[15:11] == `SUBC)
                     ||  (ex_ir[15:11] == `AND)  || (ex_ir[15:11] == `OR)
                     ||  (ex_ir[15:11] == `XOR)  || (ex_ir[15:11] == `SLL)
                     ||  (ex_ir[15:11] == `SRL)  || (ex_ir[15:11] == `SLA)
+                    ||  (ex_ir[15:11] == `SRA)
                     ) && (id_ir[10:8] == ex_ir[10:8])
                    )
                     reg_A <= ALUo;
                 else if (
                     (
-                        (mem_ir[15:11] == `SRA)  || (mem_ir[15:11] == `LDIH)
+                        (mem_ir[15:11] == `LOAD) || (mem_ir[15:11] == `LDIH)
                     ||  (mem_ir[15:11] == `ADD)  || (mem_ir[15:11] == `ADDI)
                     ||  (mem_ir[15:11] == `ADDC) || (mem_ir[15:11] == `SUB)
                     ||  (mem_ir[15:11] == `SUBI) || (mem_ir[15:11] == `SUBC)
                     ||  (mem_ir[15:11] == `AND)  || (mem_ir[15:11] == `OR)
                     ||  (mem_ir[15:11] == `XOR)  || (mem_ir[15:11] == `SLL)
-                    ||  (mem_ir[15:11] == `SRL)  || (mem_ir[15:11] == `SLA) 
+                    ||  (mem_ir[15:11] == `SRL)  || (mem_ir[15:11] == `SLA)
+                    ||  (mem_ir[15:11] == `SRA)
                     ) && (id_ir[10:8] == mem_ir[10:8])
                    )
                     reg_A <= reg_C;
                 else if (
                     (
-                        (wb_ir[15:11] == `SRA)  || (wb_ir[15:11] == `LDIH)
+                        (wb_ir[15:11] == `LOAD) || (wb_ir[15:11] == `LDIH)
                     ||  (wb_ir[15:11] == `ADD)  || (wb_ir[15:11] == `ADDI)
                     ||  (wb_ir[15:11] == `ADDC) || (wb_ir[15:11] == `SUB)
                     ||  (wb_ir[15:11] == `SUBI) || (wb_ir[15:11] == `SUBC)
                     ||  (wb_ir[15:11] == `AND)  || (wb_ir[15:11] == `OR)
                     ||  (wb_ir[15:11] == `XOR)  || (wb_ir[15:11] == `SLL)
                     ||  (wb_ir[15:11] == `SRL)  || (wb_ir[15:11] == `SLA)
+                    ||  (wb_ir[15:11] == `SRA)
                     ) && (id_ir[10:8] == wb_ir[10:8])
                    )
                     reg_A <= reg_C1;
@@ -127,37 +130,40 @@ always @ (posedge clock or negedge reset) begin
                 ) begin
                 if (//  if Hazard
                     (
-                        (ex_ir[15:11] == `SRA)  || (ex_ir[15:11] == `LDIH)
+                        (ex_ir[15:11] == `LOAD) || (ex_ir[15:11] == `LDIH)
                     ||  (ex_ir[15:11] == `ADD)  || (ex_ir[15:11] == `ADDI)
                     ||  (ex_ir[15:11] == `ADDC) || (ex_ir[15:11] == `SUB)
                     ||  (ex_ir[15:11] == `SUBI) || (ex_ir[15:11] == `SUBC)
                     ||  (ex_ir[15:11] == `AND)  || (ex_ir[15:11] == `OR)
                     ||  (ex_ir[15:11] == `XOR)  || (ex_ir[15:11] == `SLL)
                     ||  (ex_ir[15:11] == `SRL)  || (ex_ir[15:11] == `SLA)
+                    ||  (ex_ir[15:11] == `SRA)
                     ) && (id_ir[6:4] == ex_ir[10:8])
                    )
                     reg_A <= ALUo;
                 else if (
                     (
-                        (mem_ir[15:11] == `SRA)  || (mem_ir[15:11] == `LDIH)
+                        (mem_ir[15:11] == `LOAD) || (mem_ir[15:11] == `LDIH)
                     ||  (mem_ir[15:11] == `ADD)  || (mem_ir[15:11] == `ADDI)
                     ||  (mem_ir[15:11] == `ADDC) || (mem_ir[15:11] == `SUB)
                     ||  (mem_ir[15:11] == `SUBI) || (mem_ir[15:11] == `SUBC)
                     ||  (mem_ir[15:11] == `AND)  || (mem_ir[15:11] == `OR)
                     ||  (mem_ir[15:11] == `XOR)  || (mem_ir[15:11] == `SLL)
                     ||  (mem_ir[15:11] == `SRL)  || (mem_ir[15:11] == `SLA)
+                    ||  (mem_ir[15:11] == `SRA)
                     ) && (id_ir[6:4] == mem_ir[10:8])
                    )
                     reg_A <= reg_C;
                 else if (
                     (
-                        (wb_ir[15:11] == `SRA)  || (wb_ir[15:11] == `LDIH)
+                        (wb_ir[15:11] == `LOAD) || (wb_ir[15:11] == `LDIH)
                     ||  (wb_ir[15:11] == `ADD)  || (wb_ir[15:11] == `ADDI)
                     ||  (wb_ir[15:11] == `ADDC) || (wb_ir[15:11] == `SUB)
                     ||  (wb_ir[15:11] == `SUBI) || (wb_ir[15:11] == `SUBC)
                     ||  (wb_ir[15:11] == `AND)  || (wb_ir[15:11] == `OR)
                     ||  (wb_ir[15:11] == `XOR)  || (wb_ir[15:11] == `SLL)
                     ||  (wb_ir[15:11] == `SRL)  || (wb_ir[15:11] == `SLA)
+                    ||  (wb_ir[15:11] == `SRA)
                     ) && (id_ir[6:4] == wb_ir[10:8])
                    )
                     reg_A <= reg_C1;
@@ -193,37 +199,40 @@ always @ (posedge clock or negedge reset) begin
                 ) begin
                     if (//  if Hazard
                         (
-                            (ex_ir[15:11] == `SRA)  || (ex_ir[15:11] == `LDIH)
+                            (ex_ir[15:11] == `LOAD) || (ex_ir[15:11] == `LDIH)
                         ||  (ex_ir[15:11] == `ADD)  || (ex_ir[15:11] == `ADDI)
                         ||  (ex_ir[15:11] == `ADDC) || (ex_ir[15:11] == `SUB)
                         ||  (ex_ir[15:11] == `SUBI) || (ex_ir[15:11] == `SUBC)
                         ||  (ex_ir[15:11] == `AND)  || (ex_ir[15:11] == `OR)
                         ||  (ex_ir[15:11] == `XOR)  || (ex_ir[15:11] == `SLL)
                         ||  (ex_ir[15:11] == `SRL)  || (ex_ir[15:11] == `SLA)
+                        ||  (ex_ir[15:11] == `SRA)
                         ) && (id_ir[2:0] == ex_ir[10:8])
                        )
                         reg_B <= {12'b0000_0000_0000, ALUo};
                     else if (
                         (
-                            (mem_ir[15:11] == `SRA)  || (mem_ir[15:11] == `LDIH)
+                            (mem_ir[15:11] == `LOAD) || (mem_ir[15:11] == `LDIH)
                         ||  (mem_ir[15:11] == `ADD)  || (mem_ir[15:11] == `ADDI)
                         ||  (mem_ir[15:11] == `ADDC) || (mem_ir[15:11] == `SUB)
                         ||  (mem_ir[15:11] == `SUBI) || (mem_ir[15:11] == `SUBC)
                         ||  (mem_ir[15:11] == `AND)  || (mem_ir[15:11] == `OR)
                         ||  (mem_ir[15:11] == `XOR)  || (mem_ir[15:11] == `SLL)
                         ||  (mem_ir[15:11] == `SRL)  || (mem_ir[15:11] == `SLA)
+                        ||  (mem_ir[15:11] == `SRA)
                         ) && (id_ir[2:0] == mem_ir[10:8])
                        )
                         reg_B <= {12'b0000_0000_0000, reg_C};
                     else if (
                         (
-                            (wb_ir[15:11] == `SRA)  || (wb_ir[15:11] == `LDIH)
+                            (wb_ir[15:11] == `LOAD) || (wb_ir[15:11] == `LDIH)
                         ||  (wb_ir[15:11] == `ADD)  || (wb_ir[15:11] == `ADDI)
                         ||  (wb_ir[15:11] == `ADDC) || (wb_ir[15:11] == `SUB)
                         ||  (wb_ir[15:11] == `SUBI) || (wb_ir[15:11] == `SUBC)
                         ||  (wb_ir[15:11] == `AND)  || (wb_ir[15:11] == `OR)
                         ||  (wb_ir[15:11] == `XOR)  || (wb_ir[15:11] == `SLL)
                         ||  (wb_ir[15:11] == `SRL)  || (wb_ir[15:11] == `SLA)
+                        ||  (wb_ir[15:11] == `SRA)
                         ) && (id_ir[2:0] == wb_ir[10:8])
                        )
                         reg_B <= {12'b0000_0000_0000, reg_C1};
@@ -235,37 +244,40 @@ always @ (posedge clock or negedge reset) begin
         if (id_ir[15:11] == `STORE) begin
             if (//  if Hazard
                 (
-                    (ex_ir[15:11] == `SRA)  || (ex_ir[15:11] == `LDIH)
+                    (ex_ir[15:11] == `LOAD) || (ex_ir[15:11] == `LDIH)
                 ||  (ex_ir[15:11] == `ADD)  || (ex_ir[15:11] == `ADDI)
                 ||  (ex_ir[15:11] == `ADDC) || (ex_ir[15:11] == `SUB)
                 ||  (ex_ir[15:11] == `SUBI) || (ex_ir[15:11] == `SUBC)
                 ||  (ex_ir[15:11] == `AND)  || (ex_ir[15:11] == `OR)
                 ||  (ex_ir[15:11] == `XOR)  || (ex_ir[15:11] == `SLL)
                 ||  (ex_ir[15:11] == `SRL)  || (ex_ir[15:11] == `SLA)
+                ||  (ex_ir[15:11] == `SRA)
                 ) && (id_ir[10:8] == ex_ir[10:8])
                )
                 smdr <= ALUo;
             else if (
                 (
-                    (mem_ir[15:11] == `SRA)  || (mem_ir[15:11] == `LDIH)
+                    (mem_ir[15:11] == `LOAD) || (mem_ir[15:11] == `LDIH)
                 ||  (mem_ir[15:11] == `ADD)  || (mem_ir[15:11] == `ADDI)
                 ||  (mem_ir[15:11] == `ADDC) || (mem_ir[15:11] == `SUB)
                 ||  (mem_ir[15:11] == `SUBI) || (mem_ir[15:11] == `SUBC)
                 ||  (mem_ir[15:11] == `AND)  || (mem_ir[15:11] == `OR)
                 ||  (mem_ir[15:11] == `XOR)  || (mem_ir[15:11] == `SLL)
                 ||  (mem_ir[15:11] == `SRL)  || (mem_ir[15:11] == `SLA)
+                ||  (mem_ir[15:11] == `SRA)
                 ) && (id_ir[10:8] == mem_ir[10:8])
                )
                 smdr <= reg_C;
             else if (
                 (
-                    (wb_ir[15:11] == `SRA)  || (wb_ir[15:11] == `LDIH)
+                    (wb_ir[15:11] == `LOAD) || (wb_ir[15:11] == `LDIH)
                 ||  (wb_ir[15:11] == `ADD)  || (wb_ir[15:11] == `ADDI)
                 ||  (wb_ir[15:11] == `ADDC) || (wb_ir[15:11] == `SUB)
                 ||  (wb_ir[15:11] == `SUBI) || (wb_ir[15:11] == `SUBC)
                 ||  (wb_ir[15:11] == `AND)  || (wb_ir[15:11] == `OR)
                 ||  (wb_ir[15:11] == `XOR)  || (wb_ir[15:11] == `SLL)
                 ||  (wb_ir[15:11] == `SRL)  || (wb_ir[15:11] == `SLA)
+                ||  (wb_ir[15:11] == `SRA)
                 ) && (id_ir[10:8] == wb_ir[10:8])
                )
                 smdr <= reg_C1;
