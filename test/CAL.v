@@ -62,15 +62,14 @@ module cal_test;
             i_datain <= {`LOAD, `gr1, 1'b0, `gr0, 4'b0000};
 		#10 i_datain <= {`LOAD, `gr2, 1'b0, `gr0, 4'b0001};
 		#10 i_datain <= {`LOAD, `gr3, 1'b0, `gr0, 4'b0010};
-		#10 i_datain <= {`NOP, 11'b000_0000_0000};
-		    d_datain <= 16'hcccc;
-		#10 i_datain <= {`NOP, 11'b000_0000_0000};
-		    d_datain <= 16'h3bfe;
-		#10 i_datain <= {`NOP, 11'b000_0000_0000};
-		    d_datain <= 16'h00ab;
-		#10 i_datain <= {`ADDI, `gr2, 4'b0000,  4'b0010}; //gr2 = 2 + 3bfe = 3c00
-		#10 i_datain <= {`LDIH, `gr1, 4'b1111, 4'b1100};  //gr1 = cccc + fc00 = c8cc & cf = 1 & nf = 1
-        #10 i_datain <= {`ADD, `gr7, 1'b0, `gr1, 1'b0, `gr2};// gr7 = 3c00 + c8cc = 04cc & cf = 1
+		#10 i_datain <= {`ADD, `gr0, 1'b0, `gr3, 1'b0, `gr1}; // pc hold
+			d_datain <= 16'hcccc;
+		#10 i_datain <= {`ADD, `gr0, 1'b0, `gr3, 1'b0, `gr1}; //gr0 = cccc + 00ab = cd77
+            d_datain <= 16'h3bfe;
+        #10 i_datain <= {`ADDI, `gr2, 4'b0000,  4'b0010}; //gr2 = 2 + 3bfe = 3c00
+			d_datain <= 16'h00ab;
+		#10 i_datain <= {`LDIH, `gr1, 4'b1111, 4'b1100};  //gr1 = cccc + fc00 = c8cc & cf = 1 & nf = 1	
+		#10 i_datain <= {`ADD, `gr7, 1'b0, `gr1, 1'b0, `gr2};// gr7 = 3c00 + c8cc = 04cc & cf = 1
 		#10 i_datain <= {`ADDC, `gr3, 1'b0, `gr2, 1'b0, `gr3}; // gr3 = 00ab + 3c00 + cf = 3cac
 		#10 i_datain <= {`SUB, `gr1, 1'b0, `gr2, 1'b0, `gr2};// gr1 = 3c00 - 3c00 = 0 & zf = 1
         #10 i_datain <= {`ADD, `gr0, 1'b0, `gr7, 1'b0, `gr1};// gr0 = 0 + 04cc = 04cc
