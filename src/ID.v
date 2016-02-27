@@ -152,6 +152,8 @@ always @ (posedge clock or negedge reset) begin
                     ) && (id_ir[6:4] == mem_ir[10:8])
                    )
                     reg_A <= reg_C;
+                else if ((mem_ir[15:11] == `LOAD) && (id_ir[6:4] == mem_ir[10:8])) // LOAD hazard
+                    reg_A <= d_datain;
                 else if (
                     (
                         (wb_ir[15:11] == `SRA)  || (wb_ir[15:11] == `LDIH)
@@ -164,8 +166,6 @@ always @ (posedge clock or negedge reset) begin
                     ) && (id_ir[6:4] == wb_ir[10:8])
                    )
                     reg_A <= reg_C1;
-                else if ((mem_ir[15:11] == `LOAD) && (id_ir[6:4] == mem_ir[10:8])) // LOAD hazard
-                    reg_A <= d_datain;
                 else//  no hazard
                     reg_A <= gr[id_ir[6:4]];
                 end
@@ -220,6 +220,8 @@ always @ (posedge clock or negedge reset) begin
                         ) && (id_ir[2:0] == mem_ir[10:8])
                        )
                         reg_B <= {12'b0000_0000_0000, reg_C};
+                    else if ((mem_ir[15:11] == `LOAD) && (id_ir[2:0] == mem_ir[10:8])) // LOAD hazard
+                        reg_B <= d_datain;
                     else if (
                         (
                             (wb_ir[15:11] == `SRA)  || (wb_ir[15:11] == `LDIH)
@@ -232,8 +234,6 @@ always @ (posedge clock or negedge reset) begin
                         ) && (id_ir[2:0] == wb_ir[10:8])
                        )
                         reg_B <= {12'b0000_0000_0000, reg_C1};
-                    else if ((mem_ir[15:11] == `LOAD) && (id_ir[2:0] == mem_ir[10:8])) // LOAD hazard
-                        reg_B <= d_datain;
                     else//  no hazard
                         reg_B <= {12'b0000_0000_0000, gr[id_ir[2:0]]};
                 end
@@ -264,6 +264,8 @@ always @ (posedge clock or negedge reset) begin
                 ) && (id_ir[10:8] == mem_ir[10:8])
                )
                 smdr <= reg_C;
+            else if ((mem_ir[15:11] == `LOAD) && (id_ir[10:8] == mem_ir[10:8])) // LOAD hazard
+                smdr <= d_datain;
             else if (
                 (
                     (wb_ir[15:11] == `SRA)  || (wb_ir[15:11] == `LDIH)
@@ -276,8 +278,6 @@ always @ (posedge clock or negedge reset) begin
                 ) && (id_ir[10:8] == wb_ir[10:8])
                )
                 smdr <= reg_C1;
-            else if ((mem_ir[15:11] == `LOAD) && (id_ir[10:8] == mem_ir[10:8])) // LOAD hazard
-                smdr <= d_datain;
             else//  no hazard
                 smdr <= gr[id_ir[10:8]];
         end
