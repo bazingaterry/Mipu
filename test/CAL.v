@@ -70,8 +70,10 @@ module cal_test;
 		    d_datain <= 16'h00ab;
 		#10 i_datain <= {`ADDI, `gr2, 4'b0000,  4'b0010}; //gr2 = 2 + 3bfe = 3c00
 		#10 i_datain <= {`LDIH, `gr1, 4'b1111, 4'b1100};  //gr1 = cccc + fc00 = c8cc & cf = 1 & nf = 1
+        #10 i_datain <= {`ADD, `gr7, 1'b0, `gr1, 1'b0, `gr2};// gr7 = 3c00 + c8cc = 04cc & cf = 1
 		#10 i_datain <= {`ADDC, `gr3, 1'b0, `gr2, 1'b0, `gr3}; // gr3 = 00ab + 3c00 + cf = 3cac
 		#10 i_datain <= {`SUB, `gr1, 1'b0, `gr2, 1'b0, `gr2};// gr1 = 3c00 - 3c00 = 0 & zf = 1
+        #10 i_datain <= {`ADD, `gr0, 1'b0, `gr7, 1'b0, `gr1};// gr0 = 0 + 04cc = 04cc
         #10 i_datain <= {`ADD, `gr4, 1'b0, `gr2, 1'b0, `gr3};// gr4 = 3c00 + 3cac = 78ac
         #10 i_datain <= {`CMP, 4'b0000, `gr2, 1'b0, `gr3};//  3c00 - 3cac = ff54, zf = 1, nf = 1
 		#10 i_datain <= {`SUBI, `gr5, 8'b11111111};// gr5 = 0 - 00ff = ff01, nf = 1, cf = 1
