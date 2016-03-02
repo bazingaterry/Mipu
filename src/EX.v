@@ -29,6 +29,7 @@ module EX (
 	input wire [15:0] reg_B,
 	input wire [15:0] reg_A,
 	input wire [15:0] smdr,
+	input wire jump,
 	output wire [15:0] ALUo,
 	output reg [15:0] mem_ir,
 	output reg zf,
@@ -62,32 +63,35 @@ always @ (posedge clock or negedge reset) begin
 		cf     <= 1'b0;
 	end
 	else if (state == `exec) begin
-		mem_ir <= ex_ir;
-		reg_C <= ALUo;
+		if (jump)
+			mem_ir <= 16'b0000_0000_0000_0000;
+		else begin
+			mem_ir <= ex_ir;
+			reg_C <= ALUo;
+			if (
+				(ex_ir[15:11] == `LDIH) || (ex_ir[15:11] == `ADD)
+			 || (ex_ir[15:11] == `ADDI) || (ex_ir[15:11] == `ADDC)
+			 || (ex_ir[15:11] == `SUB)  || (ex_ir[15:11] == `SUBI)
+			 || (ex_ir[15:11] == `SUBC) || (ex_ir[15:11] == `CMP)
+			   ) begin
+				if (ALUo == 16'b0000_0000_0000_0000)
+					zf <= 1'b1;
+				else
+					zf <= 1'b0;
+				if (ALUo[15] == 1'b1)
+					nf <= 1'b1;
+				else
+					nf <= 1'b0;
+				cf <= cfout;
+			end
 
-		if (
-			(ex_ir[15:11] == `LDIH) || (ex_ir[15:11] == `ADD)
-		 || (ex_ir[15:11] == `ADDI) || (ex_ir[15:11] == `ADDC)
-		 || (ex_ir[15:11] == `SUB)  || (ex_ir[15:11] == `SUBI)
-		 || (ex_ir[15:11] == `SUBC) || (ex_ir[15:11] == `CMP)
-		   ) begin
-			if (ALUo == 16'b0000_0000_0000_0000)
-				zf <= 1'b1;
+			if (ex_ir[15:11] == `STORE) begin
+				dw    <= 1'b1;
+				smdr1 <= smdr;
+			end
 			else
-				zf <= 1'b0;
-			if (ALUo[15] == 1'b1)
-				nf <= 1'b1;
-			else
-				nf <= 1'b0;
-			cf <= cfout;
+				dw <= 1'b0;
 		end
-
-		if (ex_ir[15:11] == `STORE) begin
-			dw    <= 1'b1;
-			smdr1 <= smdr;
-		end
-		else
-			dw <= 1'b0;
 	end	
 end
 

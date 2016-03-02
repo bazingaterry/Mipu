@@ -46,6 +46,7 @@ wire [15:0] smdr1;
 
 wire dw;
 wire zf, nf, cf;
+wire jump;
 
 wire [15:0] ex_ir;
 wire [15:0] mem_ir;
@@ -86,7 +87,7 @@ CPU_Control CPU_Control (
 
 IF IF (
 	.clock(clock), .reset(reset), .state(state), 
-	.reg_C(reg_C), .zf(zf), .nf(nf), .cf(cf),
+	.reg_C(reg_C), .jump(jump),
 	.mem_ir(mem_ir), .i_addr(i_addr), .i_datain(i_datain),
 	.id_ir(id_ir)
 	  );
@@ -95,14 +96,14 @@ ID ID (
 	.clock(clock), .reset(reset), .state(state),
 	.id_ir(id_ir), .ex_ir(ex_ir), .mem_ir(mem_ir), .wb_ir(wb_ir),
 	.ALUo(ALUo), .reg_C(reg_C), .reg_C1(reg_C1), .d_datain(d_datain),
-	.reg_A(reg_A), .reg_B(reg_B), .smdr(smdr), 
+	.reg_A(reg_A), .reg_B(reg_B), .smdr(smdr), .jump(jump),
 	.gr0(gr[0]), .gr1(gr[1]), .gr2(gr[2]), .gr3(gr[3]),
 	.gr4(gr[4]), .gr5(gr[5]), .gr6(gr[6]), .gr7(gr[7])
 	  );
 
 EX EX (
 	.clock(clock), .reset(reset), .state(state), 
-	.ex_ir(ex_ir), .mem_ir(mem_ir),
+	.ex_ir(ex_ir), .mem_ir(mem_ir), .jump(jump),
 	.ALUo(ALUo),
 	.reg_A(reg_A), .reg_B(reg_B),
 	.smdr(smdr), .smdr1(smdr1),
@@ -122,6 +123,11 @@ WB WB (
 	.wb_ir(wb_ir), .reg_C1(reg_C1),
 	.gr0(gr0), .gr1(gr1), .gr2(gr2), .gr3(gr3),
 	.gr4(gr4), .gr5(gr5), .gr6(gr6), .gr7(gr7)
+	  );
+
+JP JP (
+	.mem_ir(mem_ir), .zf(zf), .nf(nf), .cf(cf),
+	.jump(jump)
 	  );
 
 endmodule
