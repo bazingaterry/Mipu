@@ -62,16 +62,12 @@ module log_test;
             i_datain <= {`LOAD, `gr1, 1'b0, `gr0, 4'b0000};
         #10 i_datain <= {`LOAD, `gr2, 1'b0, `gr0, 4'b0001};
         #10 i_datain <= {`LOAD, `gr3, 1'b0, `gr0, 4'b0010};
-        #10 i_datain <= {`NOP, 11'b000_0000_0000};
-            d_datain <= 16'h13ab;
-        #10 i_datain <= {`NOP, 11'b000_0000_0000};
-            d_datain <= 16'h14cc;
-        #10 i_datain <= {`NOP, 11'b000_0000_0000};
-            d_datain <= 16'h8001;
         #10 i_datain <= {`AND, `gr4, 1'b0, `gr1, 1'b0, `gr2}; //  gr4 = 13ab and 14cc = 1088
+            d_datain <= 16'h13ab;
         #10 i_datain <= {`OR, `gr5, 1'b0, `gr1, 1'b0, `gr2}; //  gr5 = 13ab or 14cc = 17ef
+            d_datain <= 16'h14cc;
         #10 i_datain <= {`XOR, `gr6, 1'b0, `gr1, 1'b0, `gr2}; // gr6 = 13ab xor 14cc = 0767
-        #10 i_datain <= {`NOP, 11'b000_0000_0000};
+            d_datain <= 16'h8001;
         #10 i_datain <= {`SLL, `gr7, 1'b0, `gr4, 4'b0010}; //  gr7 = 1088 << 2 = 4220
         #10 i_datain <= {`SRL, `gr6, 1'b0, `gr4, 4'b0010}; //  gr6 = 1088 >> 2 = 0422
         #10 i_datain <= {`SLA, `gr7, 1'b0, `gr5, 4'b0010}; //  gr7 = 17ef <<< 2 = 5fbc

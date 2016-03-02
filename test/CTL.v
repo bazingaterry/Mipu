@@ -60,28 +60,46 @@ module control_test;
         #10 start    <= 1;
         #10 start    <= 0;
             i_datain <= {`LOAD, `gr1, 1'b0, `gr0, 4'b0000};
-		#10 i_datain <= {`NOP, 11'b000_0000_0000};
-            i_datain <= {`LOAD, `gr2, 1'b0, `gr0, 4'b0000};
-        #10 i_datain <= {`NOP, 11'b000_0000_0000};
-        #10 i_datain <= {`NOP, 11'b000_0000_0000};
-            d_datain <= 16'h000b;
+		#10 i_datain <= {`LOAD, `gr2, 1'b0, `gr0, 4'b0000};
         #10 i_datain <= {`JUMP, 3'b000, 8'b00001111}; //  pc = 0f
-            d_datain <= 16'h011b;
         #10 i_datain <= {`JMPR, `gr1, 8'b00000001}; //  pc = 000b + 1 = 0c
+            d_datain <= 16'h000b;
+        #10 i_datain <= {`JUMP, 3'b000, 8'b00001111}; //  flush
+            d_datain <= 16'h011b;
+        #10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
+		#10 i_datain <= {`HALT, 11'b000_0000_0000};// flush
         #10 i_datain <= {`CMP, 3'b000, 1'b0, `gr1, 1'b0, `gr2}; // nf = 1, cf = 1
         #10 i_datain <= {`BZ, `gr1, 8'b00000111}; //  not jump
         #10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // pc = 000b + 1f = 2a
+		#10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
+		#10 i_datain <= {`HALT, 11'b000_0000_0000};// flush
+		#10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
         #10 i_datain <= {`BN, `gr1, 8'b00111111}; // pc = 000b + 3f = 4a
+		#10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
+		#10 i_datain <= {`HALT, 11'b000_0000_0000};// flush
+		#10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
         #10 i_datain <= {`BNN, `gr1, 8'b01111111}; // not jump
         #10 i_datain <= {`BC, `gr1, 8'b11111111}; // pc = 000b + ff = 0a
+		#10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
+		#10 i_datain <= {`HALT, 11'b000_0000_0000};// flush
+		#10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
         #10 i_datain <= {`BNC, `gr1, 8'b01111111}; // not jump
         #10 i_datain <= {`CMP, 3'b000, 1'b0, `gr1, 1'b0, `gr1}; // zf = 1
         #10 i_datain <= {`BZ, `gr1, 8'b00111111}; //  pc = 000b + 3f = 4a
+		#10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
+		#10 i_datain <= {`HALT, 11'b000_0000_0000};// flush
+		#10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
         #10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // not jump
         #10 i_datain <= {`BN, `gr1, 8'b00001111}; // not jump
         #10 i_datain <= {`BNN, `gr1, 8'b00000111}; // pc = 000b + 7 = 12
+		#10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
+		#10 i_datain <= {`HALT, 11'b000_0000_0000};// flush
+		#10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
         #10 i_datain <= {`BC, `gr1, 8'b00000011}; // not jump
         #10 i_datain <= {`BNC, `gr1, 8'b00000001}; // pc = 000b + 1 = 0c
+		#10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
+		#10 i_datain <= {`HALT, 11'b000_0000_0000};// flush
+		#10 i_datain <= {`BNZ, `gr1, 8'b00011111}; // flush
         #10 i_datain <= {`HALT, 11'b000_0000_0000};
 
     end
