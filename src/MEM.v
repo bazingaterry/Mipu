@@ -32,33 +32,27 @@ module MEM (
 	inout wire [15:0] d_datain,
 	output reg [15:0] wb_ir,
 	output reg [15:0] reg_C1,
-	output reg [15:0] d_dataout,
-	output reg [7:0] d_addr,
-	output reg d_we
+	output wire [15:0] d_dataout,
+	output wire [7:0] d_addr,
+	output wire d_we
     );
+
+assign d_addr = reg_C[7:0];
+assign d_dataout = smdr1;
+assign d_we = dw;
 
 always @ (posedge clock or negedge reset) begin
     if(!reset) begin
 		wb_ir     <= 16'b0000_0000_0000_0000;
 		reg_C1    <= 16'b0000_0000_0000_0000;
-		d_we      <= 0;
-		d_addr    <= 8'b0;
-		d_dataout <= 16'b0;
     end
     else if (state == `exec) begin
-		wb_ir <= mem_ir; 
-		if (mem_ir[15:11] == `LOAD) begin
-			d_we   <= dw;
+		wb_ir <= mem_ir;
+		
+		if (mem_ir[15:11] == `LOAD)
 			reg_C1 <= d_datain;
-		end
-		else if (mem_ir[15:11] == `STORE) begin
-			d_we      <= dw;
-			d_addr    <= reg_C[7:0];
-			d_dataout <= smdr1;
-		end
 		else
 			reg_C1 <= reg_C;
 	end
 end
-
 endmodule
