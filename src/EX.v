@@ -89,8 +89,10 @@ always @ (posedge clock or negedge reset) begin
 				dw    <= 1'b1;
 				smdr1 <= smdr;
 			end
-			else
+			else begin
 				dw <= 1'b0;
+				smdr1 <= 16'b0000_0000_0000_0000;
+			end
 		end
 	end	
 end
