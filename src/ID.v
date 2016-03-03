@@ -68,10 +68,8 @@ always @ (posedge clock or negedge reset) begin
     else if (state == `exec) begin
         if (id_ir[15:11] == `JUMP)
             ex_ir <= 0;
-        else
-        if (jump) begin //  flush
+        else if (jump) //  flush
             ex_ir <= 16'b0000_0000_0000_0000;
-        end
         else begin
             ex_ir <= id_ir;
 
