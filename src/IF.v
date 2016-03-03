@@ -43,27 +43,30 @@ always @ (posedge clock or negedge reset) begin
 		pc <= 8'b0000_0000;
 	end
 	else if (state == `exec) begin
-		if (jump) begin //	flush
-			id_ir <= 16'b0000_0000_0000_0000;
+		if (jump) begin
+			id_ir <= 16'b0000_0000_0000_0000;	//	flush
 			pc <= reg_C[7:0];
 		end
 		else if (id_ir[15:11] == `JUMP) begin
-			id_ir <= i_datain;
+			id_ir <= 16'b0000_0000_0000_0000;	//	flush
 			pc <= id_ir[7:0];
 		end
 		else if (//	LOAD hazard
 			     (id_ir[15:11] == `LOAD) &&
-			     	((((i_datain[15:11] == `SLL)  || (i_datain[15:11] == `SRA) || (i_datain[15:11] == `SRL) || (i_datain[15:11] == `SLA)
-	                  ) && (id_ir[10:8] == i_datain[6:4])
-                     ) || 
-	                  (    
-	                    (
+			     	(   (( (i_datain[15:11] == `SLL) || (i_datain[15:11] == `SRA) 
+			     		|| (i_datain[15:11] == `SRL) || (i_datain[15:11] == `SLA)
+	            		) && (id_ir[10:8] == i_datain[6:4]))
+			     	|| 
+	                    ((
 	                    	(i_datain[15:11] == `ADD) || (i_datain[15:11] == `ADDC)
 	                    ||	(i_datain[15:11] == `SUB) || (i_datain[15:11] == `SUBC)
 	                    ||	(i_datain[15:11] == `CMP) || (i_datain[15:11] == `AND)
 	                    ||	(i_datain[15:11] == `OR)  || (i_datain[15:11] == `XOR)
-	                    ) && ((id_ir[10:8] == i_datain[6:4]) || (id_ir[10:8] == i_datain[2:0]))
-	                  )) 
+	                    ) && ((id_ir[10:8] == i_datain[6:4]) || (id_ir[10:8] == i_datain[2:0])))
+	                ||
+	                	((i_datain[15:11] == `ADDI) || (i_datain[15:11] == `SUBI)) 
+	                	&& (id_ir[10:8] == i_datain[10:8])
+	                ) 
 			    ) begin
 			id_ir <= 16'b0000_0000_0000_0000;
 			pc <= pc;
