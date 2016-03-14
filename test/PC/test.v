@@ -6,7 +6,7 @@
 //
 // Create Date:   01:52:00 03/03/2016
 // Design Name:   PC
-// Module Name:   C:/Users/razer/OneDrive/Computer Architecture/PCPU/PCPU_with_MEM_imp/sort.v
+// Module Name:   C:/Users/razer/OneDrive/Computer Architecture/PCPU/PCPU_with_MEM_imp/test.v
 // Project Name:  PCPU_with_MEM_imp
 // Target Device:  
 // Tool versions:  
@@ -22,7 +22,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module sort;
+module test;
 
 	// Inputs
 	reg clock;

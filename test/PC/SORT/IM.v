@@ -19,6 +19,8 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
+// SORT instruction
+
 `include "define.v"
 
 module IM (
@@ -28,8 +30,8 @@ module IM (
 
 always @ (*) begin
 	case (addr[7:0])
-		00 : iout = {`ADDI, `gr1, 4'b0000,  4'b1001};
-		01 : iout = {`ADDI, `gr2, 4'b0000,  4'b1001};
+		00 : iout = {`ADDI, `gr1, 4'b0000, 4'b1001};
+		01 : iout = {`ADDI, `gr2, 4'b0000, 4'b1001};
 		02 : iout = {`JUMP, 11'b000_0000_0101};//jump to start
 		03 : iout = {`SUBI, `gr1, 4'd0, 4'd1};//new_round
 		04 : iout = {`BZ, `gr7, 4'b0001, 4'b0010};//jump to end

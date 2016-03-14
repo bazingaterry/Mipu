@@ -19,6 +19,8 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
+// SORT data
+
 `include "define.v"
 
 module DM (
@@ -35,14 +37,14 @@ reg [15:0] mem [9:0];
 always @ (posedge clk or posedge reset) begin
 	if (reset) begin
 		mem [0] <= 16'h0127;
-		mem [1] <= 16'h0541;
+		mem [1] <= 16'h0559;
 		mem [2] <= 16'h0059;
-		mem [3] <= 16'h00aa;
+		mem [3] <= 16'h0059;
 		mem [4] <= 16'h0102;
 		mem [5] <= 16'h0048;
-		mem [6] <= 16'h0058;
-		mem [7] <= 16'h017e;
-		mem [8] <= 16'h00c3;
+		mem [6] <= 16'h0000;
+		mem [7] <= 16'h0100;
+		mem [8] <= 16'h10c3;
 		mem [9] <= 16'h00cd;
 	end
 	else if (we) begin
