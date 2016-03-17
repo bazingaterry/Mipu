@@ -64,3 +64,12 @@
 `define gr5 3'b101
 `define gr6 3'b110
 `define gr7 3'b111
+
+// ********* Display Define *********//
+
+`define GR 1'b0
+`define MEM 1'b1
+
+// ********* MEM SIZE Define *********//
+
+`define MEM_SIZE 10

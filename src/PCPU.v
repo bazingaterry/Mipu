@@ -28,6 +28,8 @@ module PCPU (
 	input wire [15:0] i_datain,
 	input wire reset,
 	input wire start,
+	input wire [2:0] selectGr, // for board evaluation
+	output reg [15:0] grData, // for board evaluation
 	output wire [7:0] d_addr,
 	output wire [15:0] d_dataout,
 	output wire d_we,
@@ -76,6 +78,21 @@ always @ (*) begin
 	gr[5] <= gr5;
 	gr[6] <= gr6;
 	gr[7] <= gr7;
+end
+
+// for board evaluation
+
+always @ (*) begin
+	case(selectGr)
+		`gr0 : grData <= gr0;
+		`gr1 : grData <= gr1;
+		`gr2 : grData <= gr2;
+		`gr3 : grData <= gr3;
+		`gr4 : grData <= gr4;
+		`gr5 : grData <= gr5;
+		`gr6 : grData <= gr6;
+		`gr7 : grData <= gr7;
+	endcase
 end
 
 /************************/
