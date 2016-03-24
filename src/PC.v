@@ -30,7 +30,8 @@ module PC (
 	output wire [3:0] enableSignal,
 	output wire [6:0] displayData,
 	input wire add_in,
-	input wire select
+	input wire flag,
+	input wire [1:0] select
     );
 
 wire CPU_Clock;
@@ -82,8 +83,8 @@ KEY add(
 	);
 
 DP display (
-	.reset(dis_reset), .add(add_out), .select(select),
-	.memData(memData), .grData(grData), .address(address),
+	.reset(dis_reset), .add(add_out), .select(select), .flag(flag),
+	.memData(memData), .grData(grData), .address(address), .pc(i_addr),
 	.data(data), .displayEnable(displayEnable)
 	);
 
