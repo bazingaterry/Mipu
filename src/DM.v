@@ -38,16 +38,14 @@ reg [15:0] mem [`MEM_SIZE - 1:0];
 
 always @ (posedge clk or posedge reset) begin
 	if (reset) begin
-		mem [0] <= 16'h0127;
-		mem [1] <= 16'h0559;
-		mem [2] <= 16'h0059;
-		mem [3] <= 16'h0049;
-		mem [4] <= 16'h0102;
-		mem [5] <= 16'h0048;
-		mem [6] <= 16'h0003;
-		mem [7] <= 16'h0100;
-		mem [8] <= 16'h10c3;
-		mem [9] <= 16'h00cd;
+		mem[0] <= 16'hfffd;
+		mem[1] <= 16'h0004;
+		mem[2] <= 16'h0005;
+		mem[3] <= 16'hc369;
+		mem[4] <= 16'h69c3;
+		mem[5] <= 16'h0041;
+		mem[6] <= 16'hffff;
+		mem[7] <= 16'h0001;
 	end
 	else if (we) begin
 		mem[addr] <= din;
