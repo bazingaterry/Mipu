@@ -32,7 +32,7 @@ module CPU_Control (
 
 reg next_state;
 
-always @ (posedge clock) begin
+always @ (posedge clock or negedge reset) begin
 	if (!reset)
 		state <= `idle;
 	else

@@ -66,13 +66,10 @@ always @ (posedge clock or negedge reset) begin
         smdr  <= 16'b0000_0000_0000_0000;
     end
     else if (state == `exec) begin
-        if (id_ir[15:11] == `JUMP)
-            ex_ir <= 0;
-        else if (jump) //  flush
+        if (id_ir[15:11] == `JUMP || jump)//  flush
             ex_ir <= 16'b0000_0000_0000_0000;
         else begin
             ex_ir <= id_ir;
-
             //  write reg_A
             if (//  reg_A <= gr1
                    (id_ir[15:11] == `BZ) || (id_ir[15:11] == `BNZ)

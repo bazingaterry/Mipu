@@ -64,3 +64,14 @@
 `define gr5 3'b101
 `define gr6 3'b110
 `define gr7 3'b111
+
+// ********* Display Define *********//
+
+`define GR 2'b00
+`define MEM 2'b01
+`define PC 2'b10
+`define ADDR 2'b11
+
+// ********* MEM SIZE Define *********//
+
+`define MEM_SIZE 64

@@ -44,11 +44,11 @@ always @ (posedge clock or negedge reset) begin
 	end
 	else if (state == `exec) begin
 		if (jump) begin
-			id_ir <= 16'b0000_0000_0000_0000;	//	flush
+			id_ir <= 16'b0000_0000_0000_0000;//i_datain;
 			pc <= reg_C[7:0];
 		end
 		else if (id_ir[15:11] == `JUMP) begin
-			id_ir <= 16'b0000_0000_0000_0000;	//	flush
+			id_ir <= 16'b0000_0000_0000_0000;//i_datain;
 			pc <= id_ir[7:0];
 		end
 		else if (//	LOAD hazard
