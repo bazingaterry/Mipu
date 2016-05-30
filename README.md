@@ -6,7 +6,7 @@ A Simple MISP CPU with cache written in Verilog.
 
 It's my project of *Computer Architecture* in SMIE.
 
-这是我的*计算机组成原理*这门课程的 Project。
+这是我的计算机组成原理这门课程的 Project。
 
 ## Declaration
 
