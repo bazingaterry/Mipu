@@ -19,12 +19,10 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-// SORT data
-
 `include "define.v"
 
 module DM (
-    input wire [7:0] addr,
+    input wire [15:0] addr,
     output wire [15:0] dout,
     input wire [15:0] din,
     input wire we,
@@ -32,7 +30,7 @@ module DM (
     input wire reset
     );
 
-reg [15:0] mem [10:0];
+reg [15:0] mem [`MEM_SIZE - 1:0];
 
 always @ (posedge clk or posedge reset) begin
     if (reset) begin

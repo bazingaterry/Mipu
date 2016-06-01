@@ -1,21 +1,21 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    14:39:13 12/30/2015 
-// Design Name: 
-// Module Name:    MEM 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
+// Company:
+// Engineer:
 //
-// Dependencies: 
+// Create Date:    14:39:13 12/30/2015
+// Design Name:
+// Module Name:    MEM
+// Project Name:
+// Target Devices:
+// Tool versions:
+// Description:
 //
-// Revision: 
+// Dependencies:
+//
+// Revision:
 // Revision 0.01 - File Created
-// Additional Comments: 
+// Additional Comments:
 //
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -33,11 +33,11 @@ module MEM (
 	output reg [15:0] wb_ir,
 	output reg [15:0] reg_C1,
 	output wire [15:0] d_dataout,
-	output wire [7:0] d_addr,
+	output wire [15:0] d_addr,
 	output wire d_we
     );
 
-assign d_addr = reg_C[7:0];
+assign d_addr = reg_C;
 assign d_dataout = smdr1;
 assign d_we = dw;
 
@@ -48,7 +48,7 @@ always @ (posedge clock or negedge reset) begin
     end
     else if (state == `exec) begin
 		wb_ir <= mem_ir;
-		
+
 		if (mem_ir[15:11] == `LOAD)
 			reg_C1 <= d_datain;
 		else
