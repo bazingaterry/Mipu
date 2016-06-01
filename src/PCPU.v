@@ -28,7 +28,7 @@ module PCPU (
 	input wire [15:0] i_datain,
 	input wire reset,
 	input wire start,
-	output wire [7:0] d_addr,
+	output wire [15:0] d_addr,
 	output wire [15:0] d_dataout,
 	output wire d_we,
 	output wire [7:0] i_addr

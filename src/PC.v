@@ -36,13 +36,9 @@ wire [7:0] i_addr;
 wire [15:0] i_datain;
 
 wire [15:0] d_mem2cpu;
-wire [7:0] d_addr;
+wire [15:0] d_addr;
 wire [15:0] d_cpu2mem;
 wire d_we;
-
-wire [15:0] memData;
-wire [7:0] address;
-wire [15:0] data;
 
 CLK Clock (
 	.RST(clk_reset), .B_CLK(boardCLK),
