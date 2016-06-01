@@ -6,7 +6,7 @@
 //
 // Create Date:   01:52:00 03/03/2016
 // Design Name:   PC
-// Module Name:   C:/Users/razer/OneDrive/Computer Architecture/PCPU/PCPU_with_MEM_imp/test.v
+// Module Name:   C:/Users/razer/OneDrive/Computer Architecture/PCPU/PCPU_with_MEM_imp/sort.v
 // Project Name:  PCPU_with_MEM_imp
 // Target Device:  
 // Tool versions:  
@@ -22,7 +22,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module test;
+module sort;
 
 	// Inputs
 	reg clock;
@@ -34,7 +34,7 @@ module test;
 
 	// Instantiate the Unit Under Test (UUT)
 	PC uut (
-		.clock(clock), 
+		.boardCLK(clock), 
 		.cpu_reset(cpu_reset), 
 		.clk_reset(clk_reset),
 		.mem_reset(mem_reset),
@@ -53,7 +53,7 @@ module test;
 		start = 0;
 		enable = 0;
 
-		// Wait 100 ns for global reset to finish
+		// Wait 50 ns for global reset to finish
 		#50
 		enable <= 1;
 		start <= 0;
@@ -61,19 +61,14 @@ module test;
 		clk_reset = 1;
 		mem_reset = 1;
 		
-		#50
-		clk_reset = 0;
-		#50
-        cpu_reset = 0;
-        #50
-        mem_reset = 0;
+		#50 clk_reset = 0;
+		#50 cpu_reset = 0;
+        #50 mem_reset = 0;
 		
-		// Add stimulus here
 		#50 enable = 1;
 		#50 start = 1;
 		#50 start = 0; 
-		
-		
+
 	end
       
 endmodule

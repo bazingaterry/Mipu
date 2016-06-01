@@ -1,21 +1,21 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    16:36:03 12/31/2015 
-// Design Name: 
-// Module Name:    PCPU 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
+// Company:
+// Engineer:
 //
-// Dependencies: 
+// Create Date:    16:36:03 12/31/2015
+// Design Name:
+// Module Name:    PCPU
+// Project Name:
+// Target Devices:
+// Tool versions:
+// Description:
 //
-// Revision: 
+// Dependencies:
+//
+// Revision:
 // Revision 0.01 - File Created
-// Additional Comments: 
+// Additional Comments:
 //
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -28,8 +28,6 @@ module PCPU (
 	input wire [15:0] i_datain,
 	input wire reset,
 	input wire start,
-	input wire [2:0] selectGr, // for board evaluation
-	output reg [15:0] grData, // for board evaluation
 	output wire [7:0] d_addr,
 	output wire [15:0] d_dataout,
 	output wire d_we,
@@ -80,30 +78,13 @@ always @ (*) begin
 	gr[7] <= gr7;
 end
 
-// for board evaluation
-
-always @ (*) begin
-	case(selectGr)
-		`gr0 : grData <= gr0;
-		`gr1 : grData <= gr1;
-		`gr2 : grData <= gr2;
-		`gr3 : grData <= gr3;
-		`gr4 : grData <= gr4;
-		`gr5 : grData <= gr5;
-		`gr6 : grData <= gr6;
-		`gr7 : grData <= gr7;
-	endcase
-end
-
-/************************/
-
 CPU_Control CPU_Control (
 					.clock(clock), .reset(reset), .state(state),
 					.enable(enable), .start(start), .wb_ir(wb_ir)
 						);
 
 IF IF (
-	.clock(clock), .reset(reset), .state(state), 
+	.clock(clock), .reset(reset), .state(state),
 	.reg_C(reg_C), .jump(jump),
 	.mem_ir(mem_ir), .i_addr(i_addr), .i_datain(i_datain),
 	.id_ir(id_ir)
@@ -119,7 +100,7 @@ ID ID (
 	  );
 
 EX EX (
-	.clock(clock), .reset(reset), .state(state), 
+	.clock(clock), .reset(reset), .state(state),
 	.ex_ir(ex_ir), .mem_ir(mem_ir), .jump(jump),
 	.ALUo(ALUo),
 	.reg_A(reg_A), .reg_B(reg_B),
@@ -129,9 +110,9 @@ EX EX (
 	  );
 
 MEM MEM (
-	.clock(clock), .reset(reset), .state(state), 
+	.clock(clock), .reset(reset), .state(state),
 	.d_datain(d_datain), .d_dataout(d_dataout),  .d_addr(d_addr), .d_we(d_we),
-	.reg_C(reg_C), .dw(dw), .smdr1(smdr1), .mem_ir(mem_ir), 
+	.reg_C(reg_C), .dw(dw), .smdr1(smdr1), .mem_ir(mem_ir),
 	.wb_ir(wb_ir), .reg_C1(reg_C1)
 	    );
 
