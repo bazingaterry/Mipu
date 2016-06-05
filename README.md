@@ -2,11 +2,13 @@
 
 A Simple MISP CPU with cache written in Verilog.
 
+This design is still in progress.
+
 ## Introduction
 
 It's my project of *Computer Architecture* in SMIE.
 
-这是我的计算机组成原理这门课程的 Project。
+这是我的计算机组成原理这门课程的 Project，整个架构仍在设计中。
 
 ## Declaration
 
