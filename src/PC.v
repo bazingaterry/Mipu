@@ -39,6 +39,7 @@ wire [15:0] d_mem2cpu;
 wire [15:0] d_addr;
 wire [15:0] d_cpu2mem;
 wire d_we;
+wire [15:0] cache_out;
 
 CLK Clock (
 	.RST(clk_reset), .B_CLK(boardCLK),
@@ -48,7 +49,8 @@ CLK Clock (
 PCPU myCPU (
 	.clock(CPU_Clock), .enable(enable), .start(start), .reset(~cpu_reset),
 	.i_addr(i_addr), .i_datain(i_datain),
-	.d_addr(d_addr), .d_datain(d_mem2cpu), .d_dataout(d_cpu2mem), .d_we(d_we)
+	.d_addr(d_addr), .d_datain(d_mem2cpu), .d_dataout(d_cpu2mem), .d_we(d_we),
+	.cache_clock(MEM_Clock), .cache_reset(mem_reset)
 	);
 
 IM instructionMemory (
