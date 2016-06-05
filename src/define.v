@@ -74,4 +74,4 @@
 
 // ********* MEM SIZE Define *********//
 
-`define MEM_SIZE 1024
+`define MEM_SIZE 1025
