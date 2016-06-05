@@ -52,10 +52,7 @@ always @ (posedge clock or negedge reset) begin
         wb_ir <= mem_ir;
 
         if (mem_ir[15:11] == `LOAD) begin
-            if (hit)
-                reg_C1 <= cache_out;
-            else
-                reg_C1 <= d_datain;
+            reg_C1 <= cache_out;
         end else
             reg_C1 <= reg_C;
     end

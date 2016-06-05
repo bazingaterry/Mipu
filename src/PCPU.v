@@ -119,14 +119,14 @@ MEM MEM (
 	.d_datain(d_datain), .d_dataout(d_dataout),  .d_addr(d_addr), .d_we(d_we),
 	.reg_C(reg_C), .dw(dw), .smdr1(smdr1), .mem_ir(mem_ir),
 	.wb_ir(wb_ir), .reg_C1(reg_C1),
-	.hit(hit), .cache_out(cache_out)
+	.cache_out(cache_out)
 	    );
 
 
 CACHE CACHE (
 	.clock(cache_clock), .reset(cache_reset), .instr(mem_ir),
     .d_addr(d_addr), .d_datain(d_datain), .d_dataout(d_dataout),
-    .data_out(cache_out), .hit(hit)
+    .data_out(cache_out)
 	);
 
 WB WB (
