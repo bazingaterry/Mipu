@@ -8,7 +8,7 @@ This design is still in progress.
 
 It's my project of *Computer Architecture* in SMIE.
 
-这是我的计算机组成原理这门课程的 Project，整个架构仍在设计中。
+这是我的计算机组成原理这门课程的 Project，暂时是双路组相联的架构。
 
 ## Declaration
 
@@ -18,6 +18,6 @@ If you want to use my code you should give clear reference in your lab report.
 
 ## Detail
 
-More information please visit [My Blog](https://t.32ph.com/five-stage-misp-cpu-verilog-design-with-hazard-handle/).
+More information please visit [My Blog](https://t.32ph.com/technology-diary/verilog/cpu-with-cache/).
 
-更多细节请移步访问[我的博客](https://t.32ph.com/five-stage-misp-cpu-verilog-design-with-hazard-handle/)。
+更多细节请移步访问[我的博客](https://t.32ph.com/technology-diary/verilog/cpu-with-cache/)。
