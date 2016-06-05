@@ -23,6 +23,8 @@
 
 module PCPU (
 	input wire clock,
+	input wire cache_clock,
+	input wire cache_reset,
 	input wire [15:0] d_datain,
 	input wire enable,
 	input wire [15:0] i_datain,
@@ -54,6 +56,9 @@ wire [15:0] wb_ir;
 wire [15:0] id_ir;
 
 wire [15:0] ALUo;
+
+wire [15:0] cache_out;
+wire hit;
 
 /*** General Register ***/
 
@@ -111,10 +116,18 @@ EX EX (
 
 MEM MEM (
 	.clock(clock), .reset(reset), .state(state),
-	.d_datain(d_datain), .d_dataout(d_dataout),  .d_addr(d_addr), .d_we(d_we),
+	.d_dataout(d_dataout), .d_addr(d_addr), .d_we(d_we),
 	.reg_C(reg_C), .dw(dw), .smdr1(smdr1), .mem_ir(mem_ir),
-	.wb_ir(wb_ir), .reg_C1(reg_C1)
+	.wb_ir(wb_ir), .reg_C1(reg_C1),
+	.cache_out(cache_out)
 	    );
+
+
+CACHE CACHE (
+	.clock(cache_clock), .reset(cache_reset), .state(state),
+	.instr(mem_ir), .d_addr(d_addr), .d_datain(d_datain), .d_dataout(d_dataout),
+    .data_out(cache_out)
+	);
 
 WB WB (
 	.clock(clock), .reset(reset), .state(state),

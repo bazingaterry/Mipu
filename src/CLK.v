@@ -23,10 +23,11 @@ module CLK (
     input wire RST,
     input wire B_CLK,
     output reg CPU_CLK,
-    output reg MEM_CLK
+    output reg MEM_CLK,
+	output reg CAC_CLK
     );
 
-reg [1:0] CLK_DIV;
+reg [2:0] CLK_DIV;
 
 always @ (posedge B_CLK or posedge RST) begin
     if (RST) begin
@@ -39,7 +40,8 @@ end
 
 always @ (*) begin
     MEM_CLK <= B_CLK;
-    CPU_CLK <= CLK_DIV[1];
+	CAC_CLK <= CLK_DIV[1];
+    CPU_CLK <= CLK_DIV[2];
 end
 
 endmodule

@@ -30,7 +30,7 @@ module PC (
 
 wire CPU_Clock;
 wire MEM_Clock;
-wire DEC_Clock;
+wire CAC_Clock;
 
 wire [7:0] i_addr;
 wire [15:0] i_datain;
@@ -39,16 +39,18 @@ wire [15:0] d_mem2cpu;
 wire [15:0] d_addr;
 wire [15:0] d_cpu2mem;
 wire d_we;
+wire [15:0] cache_out;
 
 CLK Clock (
 	.RST(clk_reset), .B_CLK(boardCLK),
-	.CPU_CLK(CPU_Clock), .MEM_CLK(MEM_Clock)
+	.CPU_CLK(CPU_Clock), .MEM_CLK(MEM_Clock), .CAC_CLK(CAC_Clock)
 	);
 
 PCPU myCPU (
 	.clock(CPU_Clock), .enable(enable), .start(start), .reset(~cpu_reset),
 	.i_addr(i_addr), .i_datain(i_datain),
-	.d_addr(d_addr), .d_datain(d_mem2cpu), .d_dataout(d_cpu2mem), .d_we(d_we)
+	.d_addr(d_addr), .d_datain(d_mem2cpu), .d_dataout(d_cpu2mem), .d_we(d_we),
+	.cache_clock(CAC_Clock), .cache_reset(mem_reset)
 	);
 
 IM instructionMemory (
