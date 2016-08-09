@@ -18,6 +18,6 @@ If you want to use my code you should give clear reference in your lab report.
 
 ## Detail
 
-More information please visit [My Blog](https://t.32ph.com/technology-diary/verilog/cpu-with-cache/).
+More information please visit [My Blog](https://dev.terry.pub/technology-diary/verilog/cpu-with-cache/).
 
-更多细节请移步访问[我的博客](https://t.32ph.com/technology-diary/verilog/cpu-with-cache/)。
+更多细节请移步访问[我的博客](https://dev.terry.pub/technology-diary/verilog/cpu-with-cache/)。
